@@ -1,0 +1,25 @@
+The Nightmare on Plat Street — preview validation
+
+Preview remains SAFE: GAME_LIVE=false in app.js.
+
+Verified locally:
+- All 30 character images and the 30-door board are present.
+- The front-page banner is present.
+- JavaScript passes node --check.
+- Organizer login now only displays the organizer dashboard after the server queue endpoint confirms organizer access. A failed authorization will not reveal organizer controls.
+
+Verified with a transaction that was rolled back on the Supabase project:
+- Door opening records a candy reveal.
+- A second attempt to open the same door is rejected.
+- The same player cannot immediately take another turn.
+- A monster opening locks the remaining doors.
+- An empty monster challenge does not meet completion thresholds.
+
+Not yet verified:
+- Actual browser interactions on GitHub Pages: this environment blocked Chromium navigation, so do not treat the browser experience as fully tested.
+- Real organizer email/password login (credentials should never be shared in chat).
+- Approve/reject and challenge-finalize flows from a signed-in browser.
+- Concurrent door opens, two distinct other players, candy 60-second cooldown, full 15-candy ending.
+- Special challenge rules are organizer-verified rather than independently enforced.
+
+Do NOT set GAME_LIVE=true until these remaining tests and an explicit launch decision.
